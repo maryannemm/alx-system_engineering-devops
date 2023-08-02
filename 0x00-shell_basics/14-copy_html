@@ -1,0 +1,9 @@
+parent_dir=$(dirname "$PWD")
+
+# Copy HTML files from the current directory to the parent directory
+for html_file in *.html; do
+    if [ ! -e "$parent_dir/$html_file" ] || [ "$html_file" -nt "$parent_dir/$html_file" ]; then
+        cp "$html_file" "$parent_dir"
+        echo "Copied $html_file to $parent_dir"
+    fi
+done
