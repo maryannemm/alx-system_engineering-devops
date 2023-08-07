@@ -1,4 +1,5 @@
 #!/bin/bash
-touch "\\*\\\\'\"Best School\"'\\\\*\\$\\?\\*\\*\\*\\*\\*:\\)"
-echo "Best School" > "\\*\\\\'\"Best School\"'\\\\*\\$\\?\\*\\*\\*\\*\\*:\\)"
+filename='*\\'"Best School"'\\*$?*****:)'
+echo -e "Best School\n" > "$filename"
+echo "File '$filename' with content 'Best School' created successfully."
 

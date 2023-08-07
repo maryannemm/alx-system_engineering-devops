@@ -1,20 +1,2 @@
 #!/bin/bash
-
-# Read input words from stdin
-IFS=$'\n' read -d '' -r -a words
-
-# Create an associative array to count word occurrences
-declare -A word_count
-
-# Count occurrences of each word
-for word in "${words[@]}"; do
-    ((word_count["$word"]++))
-done
-
-# Print unique words that appear exactly once
-for word in "${!word_count[@]}"; do
-    if [ "${word_count["$word"]}" -eq 1 ]; then
-        echo "$word"
-    fi
-done | sort
-
+sort | uniq -u | awk '{ count[\$0]++ } END { for (word in count) if (count[word] == 1) print word }'

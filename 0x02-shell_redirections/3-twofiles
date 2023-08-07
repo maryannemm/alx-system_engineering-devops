@@ -1,7 +1,2 @@
 #!/bin/bash
-echo "Contents of /etc/passwd:"
-cat /etc/passwd
-
-# Display the content of /etc/hosts
-echo -e "\nContents of /etc/hosts:"
-cat /etc/hosts
+cat /etc/passwd /etc/hosts
