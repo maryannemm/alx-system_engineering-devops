@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Count the number of directories and sub-directories
+count=$(find . -mindepth 1 -type d -not -name "." -print | wc -l)
+
+echo "Number of directories and sub-directories: $count"
