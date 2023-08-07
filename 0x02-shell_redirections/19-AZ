@@ -1,6 +1,2 @@
 #!/bin/bash
-input=$(</dev/stdin)
-output="${input//A/Z}"
-output="${output//c/e}"
-echo "$output"
-
+sed 's/A/Z/g; s/c/e/g'
