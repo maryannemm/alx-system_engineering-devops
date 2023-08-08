@@ -1,0 +1,6 @@
+#!/bin/bash
+water="$WATER"
+stir="$STIR"
+bestchol=$(echo "$water + $stir" | bc)
+echo "$bestchol"
+
