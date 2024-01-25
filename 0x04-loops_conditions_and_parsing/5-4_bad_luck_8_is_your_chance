@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script displays messages based on loop iteration number
+
+# Initialize a counter
+counter=1
+
+# Using a while loop to display messages for iterations
+while [ $counter -le 10 ]; do
+    # Check iteration number and display messages accordingly
+    if [ $counter -eq 4 ]; then
+        echo "bad luck"
+    elif [ $counter -eq 8 ]; then
+        echo "good luck"
+    else
+        echo "Best School"
+    fi
+
+    ((counter++))
+done
+
