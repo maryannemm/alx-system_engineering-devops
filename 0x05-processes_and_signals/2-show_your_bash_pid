@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Display lines containing the word "bash"
-ps aux | grep bash | grep -v grep
+./1-list_your_processes | grep "bash"
 
 # shellcheck disable=SC2009
 # The third line of your script must be # shellcheck disable=SC2009
-
