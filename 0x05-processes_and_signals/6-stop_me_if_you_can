@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Find the process ID (PID) of 4-to_infinity_and_beyond
+pid=$(pgrep -f "4-to_infinity_and_beyond")
+
+if [ -n "$pid" ]; then
+    # Use the pkill command to stop the process
+    pkill -f "4-to_infinity_and_beyond"
+    echo "Terminated"
+else
+    echo "Process not found"
+fi
+

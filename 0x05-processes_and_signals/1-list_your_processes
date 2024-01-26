@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Display header
+echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"
+
+# Use ps command with options to display process information
+ps aux --forest | head -50
+

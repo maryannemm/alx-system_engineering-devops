@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Function to handle cleanup
+cleanup() {
+    echo "I hate the kill command"
+    rm -f /var/run/myscript.pid
+    exit 0
+}
+
+# Function to handle SIGINT signal
+interrupt() {
+    echo "Y U no love me?!"
+}
+
+# Trap signals
+trap 'cleanup' SIGTERM SIGQUIT
+trap 'interrupt' SIGINT
+
+# Create PID file
+echo $$ > /var/run/myscript.pid
+
+# Display message
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
+

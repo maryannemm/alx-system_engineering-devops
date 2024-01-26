@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Find the process ID (PID) of 7-highlander
+pid=$(pgrep -f "7-highlander")
+
+if [ -n "$pid" ]; then
+    # Use the pkill command to stop the process
+    pkill -f "7-highlander"
+else
+    echo "Process not found"
+fi
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Display lines containing the word "bash"
+ps aux | grep bash | grep -v grep
+
+# shellcheck disable=SC2009
+# The third line of your script must be # shellcheck disable=SC2009
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Get the PID of the current script
+script_pid=$$
+
+# Get the PID and process name of processes containing the word "bash"
+pgrep -l bash | while read -r pid pname; do
+    echo "$pid $pname"
+    echo "$script_pid 3-show_your_bash_pid_made_easy"
+done
+
