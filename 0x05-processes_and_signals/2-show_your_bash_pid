@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Display lines containing the word "bash"
 ./1-list_your_processes | grep "bash"
