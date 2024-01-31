@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Display listening sockets with PID and program name
+
+# Check if script is run with sudo
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Please run with sudo or as root."
+    exit 1
+fi
+
+# Check if netstat and lsof are available
+if ! command -v ss &> /dev/null || ! command -v lsof &> /dev/null; then
+    echo "Please install ss and lsof before running this script."
+    exit 1
+fi
+
+# Display header
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+
+# Display listening TCP ports
+ss -tuln | grep '^LISTEN' | awk '{print $1, $5}' | while read line; do
+    proto=$(echo $line | awk '{print $1}')
+    local_addr=$(echo $line | awk '{print $2}')
+
+    # Get PID and program name using lsof
+    pid=$(lsof -i $local_addr -sTCP:LISTEN -t)
+    program_name=$(ps -p $pid -o comm=)
+
+    # Display the information
+    echo "$proto       -      -      $local_addr                           -       $pid/$program_name"
+done
+
+# Display listening UDP ports
+ss -uln | grep '^UNCONN' | awk '{print $1, $5}' | while read line; do
+    proto=$(echo $line | awk '{print $1}')
+    local_addr=$(echo $line | awk '{print $2}')
+
+    # Get PID and program name using lsof
+    pid=$(lsof -i $local_addr -sUDP:LISTEN -t)
+    program_name=$(ps -p $pid -o comm=)
+
+    # Display the information
+    echo "$proto       -      -      $local_addr                           -                     $pid/$program_name"
+done
+
