@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script displays all active IPv4 IPs on the machine
+
+# Use ifconfig to get network interface information
+ifconfig | grep -oP '(?<=inet\s)(\d+\.\d+\.\d+\.\d+)' | cat -e
+

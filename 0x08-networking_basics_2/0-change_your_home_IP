@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script configures an Ubuntu server with specified IP address mappings
+
+# Change localhost IP to 127.0.0.2
+sudo sed -i 's/127.0.0.1/127.0.0.2/g' /etc/hosts
+
+# Change facebook.com IP to 8.8.8.8
+sudo sed -i 's/157.240.11.35/8.8.8.8/g' /etc/hosts
+
