@@ -1,0 +1,24 @@
+Web Infrastructure Design for www.foobar.com
+User Accessing the Website:
+User Request: A user wants to access the website hosted at www.foobar.com.
+Domain Name Resolution: The user's browser sends a DNS query to resolve the domain name www.foobar.com to an IP address. This query is resolved to the server's IP address, which is 8.8.8.8.
+Components of the Infrastructure:
+Server: A physical or virtual machine responsible for hosting and serving the website.
+Web Server (Nginx): Serves as the entry point for all incoming HTTP requests and handles static content delivery efficiently.
+Application Server: Hosts the application codebase and handles dynamic content generation and processing.
+Application Files: The codebase of the website, including scripts, stylesheets, and other assets.
+Database (MySQL): Stores and manages website data, such as user information, content, and session data.
+Specifics of the Infrastructure:
+Server: The server is the physical or virtual machine that hosts and serves the website. It is responsible for running the necessary software components and managing resources to handle incoming requests.
+Domain Name: A domain name, such as www.foobar.com, serves as a human-readable alias for the server's IP address (8.8.8.8). It allows users to easily access the website without needing to remember the IP address.
+DNS Record for www: The www in www.foobar.com is a subdomain and is typically configured as a CNAME (Canonical Name) DNS record that points to the main domain record.
+Web Server (Nginx): Nginx acts as the web server, receiving incoming HTTP requests from users' browsers and serving static content efficiently. It can also act as a reverse proxy, forwarding dynamic requests to the application server.
+Application Server: The application server hosts the website's codebase and executes server-side logic to generate dynamic content. It handles requests for dynamic pages, interacts with databases, and processes user input.
+Database (MySQL): MySQL is a relational database management system used to store and manage website data. It provides features for data storage, retrieval, and manipulation, ensuring data consistency and integrity.
+Communication with User's Computer: The server communicates with the user's computer over the Internet using the HTTP protocol. When a user requests a webpage, the server processes the request and sends the corresponding HTML, CSS, and JavaScript files back to the user's browser for rendering.
+Issues with the Infrastructure:
+Single Point of Failure (SPOF): Since there is only one server hosting the entire infrastructure, any hardware or software failure can result in downtime for the entire website.
+Downtime during Maintenance: Performing maintenance tasks, such as deploying new code or restarting the web server, can lead to downtime, disrupting user access to the website.
+Scalability Challenges: The infrastructure may struggle to handle a significant increase in incoming traffic, leading to performance issues or website downtime during peak periods. Scaling resources horizontally (adding more servers) may be difficult due to the tightly coupled nature of the components.
+
+

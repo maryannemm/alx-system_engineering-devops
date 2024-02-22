@@ -1,0 +1,39 @@
+### Three-Server Web Infrastructure Design for www.foobar.com
+
+#### Introduction:
+The design includes multiple servers and components to ensure reliability, scalability, and performance for hosting the website www.foobar.com.
+
+#### Components of the Infrastructure:
+1. **Server 1 (Web Server + Application Server)**:
+   - **Web Server (Nginx)**: Handles incoming HTTP requests, serves static content, and acts as a reverse proxy for dynamic content.
+   - **Application Server**: Hosts the website's codebase and executes server-side logic for generating dynamic content.
+
+2. **Server 2 (Application Server)**:
+   - **Application Server**: Additional server to distribute the load of processing dynamic requests from users.
+
+3. **Load Balancer (HAProxy)**:
+   - **Distribution Algorithm**: HAProxy is configured with a Round Robin distribution algorithm. It evenly distributes incoming requests among the available servers in a circular manner.
+   - **Active-Active Setup**: The load balancer is set up in an Active-Active configuration, where both servers actively handle incoming requests simultaneously. This setup improves performance and redundancy by distributing the workload across multiple servers.
+
+4. **Database (MySQL)**:
+   - **Primary-Replica (Master-Slave) Cluster**: The database is configured as a Primary-Replica cluster, where one server acts as the Primary node (Master) and the other as the Replica node (Slave).
+   - **Primary Node**: Handles write operations (inserts, updates, deletes) and serves as the primary source of data.
+   - **Replica Node**: Replicates data from the Primary node and serves read operations (select queries). It provides redundancy and scalability by distributing the read workload.
+
+5. **Application Files**: The codebase of the website, including scripts, stylesheets, and other assets, deployed on both Application Servers.
+
+#### Specifics of the Infrastructure:
+- **Web Server + Application Server**: Combining Nginx and the Application Server on Server 1 allows for efficient handling of both static and dynamic content. It improves performance by reducing the number of network hops.
+- **Second Application Server**: Adding a second Application Server improves fault tolerance and allows for better distribution of the application workload.
+- **Load Balancer (HAProxy)**: HAProxy distributes incoming HTTP requests among the available Application Servers using a Round Robin algorithm. This ensures that each server receives an equal share of requests, improving overall system performance and scalability.
+- **Active-Active Setup**: With an Active-Active setup, both Application Servers are actively serving requests, providing redundancy and scalability. If one server fails, the load balancer automatically redirects traffic to the remaining healthy server, minimizing downtime.
+- **Primary-Replica Database Cluster**: The Primary-Replica cluster ensures data redundancy and high availability. Write operations are directed to the Primary node, while read operations can be distributed across multiple Replica nodes, improving read scalability and offloading read traffic from the Primary node.
+
+#### Issues with the Infrastructure:
+1. **Single Points of Failure (SPOF)**:
+   - The load balancer, database, and each server represent potential single points of failure. Failure of any of these components could lead to downtime or degraded performance.
+2. **Security Issues**:
+   - Lack of firewall configurations exposes the infrastructure to security threats, such as unauthorized access or denial-of-service attacks.
+   - Absence of HTTPS encryption leaves data transmitted between users and the website vulnerable to interception and tampering.
+3. **No Monitoring**:
+   - Without proper monitoring tools and processes in place, it becomes challenging to detect and respond to performance issues, security breaches, or system failures in a timely manner. Monitoring is essential for maintaining the health and reliability of the infrastructure.

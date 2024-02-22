@@ -1,0 +1,40 @@
+### Readme
+
+In this project, we will discuss the differentiation between an application server and a web server and design a scalable web infrastructure utilizing a server and a load balancer (HAproxy) configured as a cluster. Each component (web server, application server, and database) will be split into their own server for improved scalability and reliability.
+
+#### Application Server vs Web Server:
+
+- **Web Server**:
+  - A web server is responsible for handling HTTP requests from clients (browsers) and serving static content like HTML files, images, CSS, and JavaScript. It processes client requests and returns the requested web pages to the users. Common examples of web servers include Apache HTTP Server, Nginx, and Microsoft IIS.
+
+- **Application Server**:
+  - An application server is responsible for executing the business logic of web applications and generating dynamic content. It interacts with databases, performs calculations, and processes user input to generate personalized responses. Application servers support various programming languages and frameworks, such as Node.js, Flask, Django, and Ruby on Rails.
+
+#### Infrastructure Design:
+
+For this project, we will design a scalable web infrastructure using the following components:
+
+1. **Server**:
+   - A single server will host the entire web infrastructure, including the web server, application server, and database.
+
+2. **Load-Balancer (HAproxy)**:
+   - HAproxy will be configured as a cluster with the other load balancer for high availability and load distribution. It will distribute incoming traffic across multiple instances of web and application servers to improve performance and reliability.
+
+3. **Split Components**:
+   - Each component (web server, application server, and database) will be deployed on separate servers to ensure scalability, fault isolation, and ease of management. Splitting components allows for independent scaling of resources based on demand and minimizes the impact of failures on other components.
+
+#### Specifics of the Infrastructure:
+
+- **Single Server**:
+  - The decision to use a single server for hosting the web infrastructure is based on simplicity, cost-effectiveness, and ease of management, especially for small to medium-scale applications.
+
+- **Load Balancer (HAproxy)**:
+  - HAproxy is chosen as the load balancer due to its high performance, flexibility, and support for clustering. Configuring HAproxy as a cluster ensures high availability and fault tolerance by distributing incoming traffic across multiple load balancer instances.
+
+- **Split Components**:
+  - Splitting components into separate servers allows for better resource utilization, improved scalability, and easier maintenance. It also provides isolation between different components, reducing the risk of resource contention and failure propagation.
+
+#### Additional Notes:
+
+- For larger-scale applications with higher traffic and stricter reliability requirements, it may be necessary to deploy multiple servers for each component and implement additional redundancy and failover mechanisms.
+- Continuous monitoring and performance optimization are essential for maintaining the scalability, reliability, and security of the web infrastructure over time. Implementing automated monitoring and alerting systems can help detect issues proactively and ensure timely resolution.
