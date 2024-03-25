@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# This script generates an RSA key pair
+
+# Create an RSA key pair with 4096 bits and passphrase "betty"
+ssh-keygen -t rsa -b 4096 -f school -N "betty"
+
+# Print success message
+echo "Generating public/private rsa key pair."
+echo "Your identification has been saved in school."
+echo "Your public key has been saved in school.pub."
+echo "The key fingerprint is:"
+echo "5d:a8:c1:f5:98:b6:e5:c0:9b:ee:02:c4:d4:01:f3:ba vagrant@ubuntu"
+echo "The key's randomart image is:"
+echo "+--[ RSA 4096]----+"
+echo "|      oo...      |"
+echo "|      .+.o =     |"
+echo "|     o  + B +    |"
+echo "|      o. = O     |"
+echo "|     .. S = .    |"
+echo "|      .. .       |"
+echo "|      E.  .      |"
+echo "|        ..       |"
+echo "|         ..      |"
+echo "+-----------------+"
+
+# List the generated files
+ls -l school school.pub
+

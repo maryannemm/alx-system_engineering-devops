@@ -1,0 +1,7 @@
+# Create an SSH client configuration file named "config" in the ~/.ssh directory
+# with the specified settings
+
+Host *
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
+
