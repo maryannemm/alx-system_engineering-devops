@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This script configures Nginx to redirect /redirect_me to another page with a 301 Moved Permanently status.
+
+# Install Nginx (if not already installed)
+apt-get update
+apt-get install -y nginx
+
+# Configure Nginx to listen on port 80
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}" > /etc/nginx/sites-available/default
+
+# Restart Nginx
+service nginx restart
+
+# Print success message
+echo "Nginx configured for redirection successfully!"
+
