@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Update package repositories
 sudo apt-get update
@@ -7,37 +7,45 @@ sudo apt-get update
 sudo apt-get install -y haproxy
 
 # Configure HAProxy
-sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<'EOF'
-global
-    log /dev/log    local0
-    log /dev/log    local1 notice
-    chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
-    stats timeout 30s
-    user haproxy
-    group haproxy
-    daemon
-
-defaults
-    log global
-    mode    http
-    option  httplog
-    option  dontlognull
-    timeout connect 5000
-    timeout client  50000
-    timeout server  50000
-
-frontend http_front
-    bind *:80
-    stats uri /haproxy?stats
-    default_backend http_back
-
-backend http_back
+DOMAIN_NAME="[STUDENT_ID].tech"
+INIT_FILE='/etc/default/haproxy'
+CONFIG_FILE='/etc/haproxy/haproxy.cfg'
+HAPROXY_LB_CONFIG="\
+#--$DOMAIN_NAME-params-begin--
+backend $DOMAIN_NAME-backend
     balance roundrobin
-    server web-01 [STUDENT_ID]-web-01:80 check
-    server web-02 [STUDENT_ID]-web-02:80 check
-EOF
+    server [STUDENT_ID]-web-01 [STUDENT_ID]-web-01.[STUDENT_ID].tech:80 check
+    server [STUDENT_ID]-web-02 [STUDENT_ID]-web-02.[STUDENT_ID].tech:80 check
+frontend $DOMAIN_NAME-frontend
+    bind *:80
+    mode http
+    default_backend $DOMAIN_NAME-backend
+#--$DOMAIN_NAME-params-end--
+"
 
-# Restart HAProxy
-sudo service haproxy restart
+# Enable HAProxy management via init script
+if ! grep -q '^ENABLED=[01]$' "$INIT_FILE"; then
+    echo 'ENABLED=1' | sudo tee -a "$INIT_FILE" > /dev/null
+fi
+
+# Add HAProxy configuration
+if ! grep -q "$DOMAIN_NAME-backend" "$CONFIG_FILE"; then
+    echo -e "$HAPROXY_LB_CONFIG" | sudo tee -a "$CONFIG_FILE" > /dev/null
+else
+    start_tkn="#--$DOMAIN_NAME-params-begin--"
+    end_tkn="#--$DOMAIN_NAME-params-end--"
+    a=$(grep -onE "$start_tkn" < "$CONFIG_FILE" | cut -d : -f1)
+    b=$(grep -onE "$end_tkn" < "$CONFIG_FILE" | cut -d : -f1)
+    a=$((a - 1))
+    b=$((b + 1))
+    sudo sed -i "$a,$b d" "$CONFIG_FILE"
+    echo -en "$HAPROXY_LB_CONFIG" | sudo tee -a "$CONFIG_FILE" > /dev/null
+fi
+
+# Start or restart HAProxy service
+if [[ $(pgrep -c haproxy) -le 0 ]]; then
+    sudo service haproxy start
+else
+    sudo service haproxy restart
+fi
 
