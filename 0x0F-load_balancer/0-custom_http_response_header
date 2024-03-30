@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Configure NGINX server with custom header response
+
+# Update package repositories
+sudo apt-get -y update
+
+# Install NGINX
+sudo apt-get -y install nginx
+
+# Create a simple index file
+echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
+
+# Add a rewrite rule for redirection
+sudo sed -i '/^\s*server_name.*/a \        rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+# Add a custom header to HTTP response
+sudo sed -i '/^\s*location.*/i \        add_header X-Served-By $hostname;' /etc/nginx/sites-available/default
+
+# Add a custom 404 error page
+sudo sed -i '/^\s*location.*/i \        error_page 404 /custom_404.html;' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
+# Start NGINX service
+sudo service nginx start
+
