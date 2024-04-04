@@ -1,0 +1,7 @@
+Nginx is not running, starting it...
+ * Starting nginx nginx
+   ...done.
+Restarting Nginx...
+ * Restarting nginx nginx
+   ...done.
+Nginx configured to listen on port 80.
