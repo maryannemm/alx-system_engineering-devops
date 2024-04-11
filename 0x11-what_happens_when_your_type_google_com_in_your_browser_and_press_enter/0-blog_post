@@ -1,0 +1,66 @@
+Certainly! Let's illustrate the flow of a request when you type **[https://www.google.com](https://www.google.com)** in your browser and press Enter. I'll break it down step by step:
+
+1. **DNS Resolution**:
+   - Your browser sends a request to the **DNS (Domain Name System) resolver** to translate the domain name "www.google.com" into an **IP address**.
+   - The DNS resolver responds with the IP address of the Google server ².
+
+2. **Request Hits Server IP on the Appropriate Port**:
+   - Using the resolved IP address, your browser establishes a connection to the Google server by sending an HTTP request over **port 80** (HTTP) or **port 443** (HTTPS).
+
+3. **Traffic Encryption**:
+   - If you're using HTTPS (which is the case for Google), the traffic is **encrypted** using SSL/TLS protocols. This ensures secure communication between your browser and the server.
+
+4. **Firewall**:
+   - The request passes through any **firewalls** or security measures set up by the network infrastructure. Firewalls may filter or allow traffic based on rules.
+
+5. **Load Balancer**:
+   - Google's infrastructure often employs **load balancers** to distribute incoming requests across multiple servers.
+   - The load balancer ensures even distribution of traffic, improves performance, and provides redundancy.
+
+6. **Web Server Answers the Request**:
+   - The load balancer forwards the request to an appropriate **web server** within Google's data centers.
+   - The web server processes the request and prepares to serve a web page.
+
+7. **Application Server Generates the Web Page**:
+   - If the requested page involves dynamic content (e.g., search results), the **application server** comes into play.
+   - The application server generates the web page by executing code (e.g., Python, Java, PHP) and fetching data from databases.
+
+8. **Application Server Requests Data from the Database**:
+   - The application server queries the **database** (which could be distributed across multiple servers) to retrieve relevant data.
+   - This data might include search results, user profiles, or any other information needed to construct the web page.
+
+Here's a simplified diagram to visualize the flow:
+
+```
++-------------------+    +-------------------+    +-------------------+
+|                   |    |                   |    |                   |
+|   Browser         |    |   DNS Resolver    |    |   Google Server   |
+|                   |    |                   |    |                   |
++-------------------+    +-------------------+    +-------------------+
+        |                        |                        |
+        v                        v                        v
++-------------------+    +-------------------+    +-------------------+
+|                   |    |                   |    |                   |
+|   Request Hits    |    |   Resolved IP     |    |   Web Page        |
+|   Server IP       |    |   Address         |    |   (HTML, CSS, JS) |
+|                   |    |                   |    |                   |
++-------------------+    +-------------------+    +-------------------+
+        |                        |                        |
+        v                        v                        v
++-------------------+    +-------------------+    +-------------------+
+|                   |    |                   |    |                   |
+|   Encrypted       |    |   Firewall        |    |   Application     |
+|   Traffic         |    |                   |    |   Server          |
+|                   |    |                   |    |                   |
++-------------------+    +-------------------+    +-------------------+
+```
+
+Feel free to use this diagram in your blog post! As for contributing to the comprehensive answer, I recommend checking out the [What Happens When](https://github.com/alex/what-happens-when#the-g-key-is-pressed) repository on GitHub. You can submit a meaningful pull request to enhance the community's understanding of various technical concepts. Happy contributing! 🚀
+
+Source: Conversation with Bing, 4/11/2024
+(1) Flow of the request created when you type https://www.google.com in .... https://dev.to/damian_chisom/flow-of-the-request-created-when-you-type-httpswwwgooglecom-in-your-browser-and-press-enter-2c4l.
+(2) Flowchart Maker & Online Diagram Software - Draw.io. https://app.diagrams.net/.
+(3) A schema illustrating the flow of the request created when you type .... https://medium.com/@lovethokwudiri/a-schema-illustrating-the-flow-of-the-request-created-when-you-type-https-www-google-com-c5ba950bdfd3.
+(4) draw.io. https://www.drawio.com/.
+(5) Flowchart Maker | Create Flowcharts Online in Lucidchart. https://www.lucidchart.com/pages/examples/flowchart-maker.
+(6) undefined. https://www.google.com.
