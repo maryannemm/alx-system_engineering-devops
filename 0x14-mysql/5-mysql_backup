@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <mysql_password>"
+    exit 1
+fi
+
+# Set the password for MySQL root user
+password="$1"
+
+# Get the current date in the desired format (day-month-year)
+date=$(date +%d-%m-%Y)
+
+# Define the file names
+dump_file="backup.sql"
+archive_file="$date.tar.gz"
+
+# Perform MySQL dump with all databases
+mysqldump -uroot -p$password --all-databases > $dump_file
+
+# Check if MySQL dump was successful
+if [ $? -ne 0 ]; then
+    echo "MySQL dump failed. Exiting."
+    exit 1
+fi
+
+# Compress the MySQL dump file into a tar.gz archive
+tar -czf $archive_file $dump_file
+
+# Check if compression was successful
+if [ $? -ne 0 ]; then
+    echo "Compression failed. Exiting."
+    exit 1
+fi
+
+# Remove the MySQL dump file
+rm $dump_file
+
+# Display the created files
+echo "MySQL dump created: $dump_file"
+echo "Compressed archive created: $archive_file"
+
