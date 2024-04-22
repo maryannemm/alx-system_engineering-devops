@@ -2,9 +2,8 @@
 """
 A Python script that, using a REST API, retrieves information about an employee's TODO list progress.
 """
-
-import sys
 import requests
+import sys 
 
 def get_employee_todo_progress(employee_id):
     """

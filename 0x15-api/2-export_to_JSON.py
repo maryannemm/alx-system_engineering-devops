@@ -4,9 +4,9 @@ A Python script that, using a REST API, retrieves information about an employee'
 and exports the data in JSON format.
 """
 
-import sys
 import json
 import requests
+import sys
 
 def get_employee_todo_progress(employee_id):
     """
