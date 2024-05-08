@@ -1,0 +1,28 @@
+Issue Summary:
+
+Duration: The outage occurred on April 23, 2024, from 10:00 AM to 2:00 PM (UTC).
+Impact: The main web server was down, resulting in a 50% decrease in website availability. Users experienced slow loading times and intermittent errors.
+Root Cause: The root cause of the outage was identified as a misconfiguration in the Apache server settings.
+Timeline:
+
+10:00 AM (UTC): Issue detected through monitoring alerts indicating high server response times.
+10:05 AM: Engineering team notified of the issue via automated alerting system.
+10:10 AM: Initial investigation focused on network connectivity and server resource utilization.
+10:30 AM: Misleading investigation paths explored, including potential DDoS attack and database issues.
+11:00 AM: Issue escalated to senior sysadmins for further investigation.
+12:00 PM: Root cause identified as misconfigured Apache server settings causing excessive server load.
+1:00 PM: Configuration changes implemented to correct the issue.
+2:00 PM: Services restored to normal operation.
+Root Cause and Resolution:
+
+Root Cause: The misconfiguration in the Apache server settings led to inefficient handling of incoming requests, causing the server to become overloaded and unresponsive.
+Resolution: The misconfigured settings were corrected by adjusting the Apache configuration files to optimize server performance and resource utilization.
+Corrective and Preventative Measures:
+
+Improvements/Fixes:
+Implement regular audits of server configurations to identify and correct potential misconfigurations.
+Enhance monitoring and alerting systems to provide early detection of similar issues in the future.
+Tasks to Address the Issue:
+Conduct a comprehensive review of all server configurations to ensure alignment with best practices.
+Develop and implement automated configuration management processes to prevent future misconfigurations.
+Enhance documentation and knowledge sharing among team members to improve troubleshooting efficiency.
