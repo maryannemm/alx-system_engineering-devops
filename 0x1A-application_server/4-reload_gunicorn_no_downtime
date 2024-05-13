@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Get the PID of the master Gunicorn process
+grep gunicorn | xargs kill -HUP
