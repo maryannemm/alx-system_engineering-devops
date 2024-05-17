@@ -1,37 +1,9 @@
 # Puppet manifest to fix Nginx configuration to handle increased load
 
-# Increase buffer size to handle larger responses
-file { '/etc/nginx/sites-available/default':
-  ensure  => present,
-  content => "server {
-                listen 80 default_server;
-                listen [::]:80 default_server ipv6only=on;
-
-                root /usr/share/nginx/html;
-                index index.html index.htm;
-
-                server_name localhost;
-
-                location / {
-                        # First attempt to serve request as file, then
-                        # as directory, then fall back to displaying a 404.
-                        try_files $uri $uri/ =404;
-                        # Increase buffer size
-                        fastcgi_buffers 16 16k;
-                        fastcgi_buffer_size 32k;
-                        # Uncomment the following line if HTTPS is enabled
-                        # add_header X-Frame-Options "SAMEORIGIN";
-                        # Uncomment the following line if using a larger file size
-                        # client_max_body_size 100M;
-                }
-        }",
-  notify  => Exec['reload-nginx'],
+# Fixing the number of failed requests to get to 0
+exec { 'fix--for-nginx':
+  command => "sed -i 's/worker_processes 4;/worker_processes 7;/g' /etc/nginx/nginx.conf; sudo service nginx restart",
+  path    => ['/bin', '/usr/bin', '/usr/sbin']
 }
 
-# Reload Nginx configuration after changes
-exec { 'reload-nginx':
-  command     => '/usr/sbin/service nginx reload',
-  path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  refreshonly => true,
-}
 
